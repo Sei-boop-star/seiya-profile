@@ -250,7 +250,11 @@ main {
   padding-left: 16px;
   font-size: 13px;
   color: #666;
-  line-height: 1.7;
+  line-height: 1.6;
+}
+
+.role-list li {
+  margin-bottom: 4px;
 }
 
 /* Talk */
@@ -322,7 +326,7 @@ footer {
   }
 
   .timeline::before {
-    left: 36px;
+    left: 46px;
   }
 
   .timeline li {
@@ -330,7 +334,7 @@ footer {
   }
 
   .timeline li::before {
-    left: 33px;
+    left: 43px;
   }
 
   .role-list {
