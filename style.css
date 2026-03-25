@@ -237,6 +237,14 @@ main {
   line-height: 1.7;
 }
 
+.role-list {
+  margin-top: 6px;
+  padding-left: 16px;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.7;
+}
+
 /* Footer */
 footer {
   text-align: center;
