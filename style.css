@@ -256,15 +256,14 @@ main {
 
 .role-list li {
   margin-bottom: 6px;
-  padding-left: 12px;
-  position: relative;
+  display: flex;
+  gap: 6px;
 }
 
 .role-list li::before {
   content: '–';
-  position: absolute;
-  left: 0;
   color: var(--muted);
+  flex-shrink: 0;
 }
 
 /* Talk */
@@ -345,10 +344,6 @@ footer {
 
   .timeline li::before {
     left: 43px;
-  }
-
-  .role-list {
-    padding-left: 12px;
   }
 
   .content {
