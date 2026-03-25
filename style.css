@@ -116,6 +116,12 @@ main {
 }
 
 /* Now grid */
+.now-company {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
 .now-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -264,5 +270,25 @@ footer {
 
   .now-grid {
     grid-template-columns: 1fr;
+  }
+
+  .timeline::before {
+    left: 36px;
+  }
+
+  .timeline li {
+    gap: 20px;
+  }
+
+  .timeline li::before {
+    left: 33px;
+  }
+
+  .role-list {
+    padding-left: 12px;
+  }
+
+  .content {
+    padding-left: 8px;
   }
 }
