@@ -1,0 +1,257 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --text: #1a1a1a;
+  --muted: #888;
+  --border: #d4d4d0;
+  --bg: #fff;
+}
+
+body {
+  font-family: 'Noto Sans JP', 'Inter', sans-serif;
+  background: #f0f0ec;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  background: var(--bg);
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 56px 64px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+
+/* Header */
+.doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 2px solid var(--text);
+  padding-bottom: 12px;
+  margin-bottom: 40px;
+}
+
+.doc-header h1 {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.doc-date {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Sections */
+.block {
+  margin-bottom: 36px;
+}
+
+.block h2 {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+  margin-bottom: 16px;
+  font-family: 'Inter', sans-serif;
+}
+
+.block p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #333;
+}
+
+.block p + p {
+  margin-top: 8px;
+}
+
+/* Info table */
+.info-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.info-table tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.info-table th {
+  width: 80px;
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 6px 12px 6px 0;
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.info-table td {
+  padding: 6px 0;
+  font-size: 13px;
+}
+
+/* Job block */
+.job {
+  margin-bottom: 28px;
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2px;
+}
+
+.job-company {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.job-period {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+}
+
+.job-dept {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+/* Job table */
+.job-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+}
+
+.job-table th {
+  background: #f7f7f5;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  text-align: left;
+  color: var(--muted);
+}
+
+.job-table td {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.7;
+  color: #333;
+}
+
+.period-cell {
+  white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  width: 90px;
+}
+
+.job-table ul {
+  list-style: none;
+  padding: 0;
+}
+
+.job-table ul li {
+  padding-left: 12px;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.job-table ul li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--muted);
+}
+
+/* Skill table */
+.skill-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.skill-table tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.skill-table th {
+  width: 130px;
+  font-weight: 500;
+  font-size: 12px;
+  padding: 7px 12px 7px 0;
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.skill-table td {
+  padding: 7px 0;
+  font-size: 13px;
+  color: #333;
+  line-height: 1.7;
+}
+
+/* Print */
+@media print {
+  body {
+    background: #fff;
+    font-size: 11px;
+  }
+
+  .page {
+    box-shadow: none;
+    margin: 0;
+    padding: 20mm 18mm;
+    max-width: 100%;
+  }
+
+  .block {
+    page-break-inside: avoid;
+  }
+
+  .job {
+    page-break-inside: avoid;
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .page {
+    padding: 32px 20px;
+    margin: 0;
+  }
+
+  .doc-header {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .job-header {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .period-cell {
+    width: 72px;
+  }
+}
