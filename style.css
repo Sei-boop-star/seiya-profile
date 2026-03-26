@@ -158,18 +158,18 @@ main {
   background: var(--border);
 }
 
-.timeline li {
+.timeline > li {
   display: flex;
   gap: 32px;
   padding-bottom: 36px;
   position: relative;
 }
 
-.timeline li:last-child {
+.timeline > li:last-child {
   padding-bottom: 0;
 }
 
-.timeline li::before {
+.timeline > li::before {
   content: '';
   position: absolute;
   left: 49px;
@@ -181,7 +181,7 @@ main {
   border: 1px solid var(--border);
 }
 
-.timeline li.current::before {
+.timeline > li.current::before {
   background: var(--text);
   border-color: var(--text);
 }
@@ -338,11 +338,11 @@ footer {
     left: 46px;
   }
 
-  .timeline li {
+  .timeline > li {
     gap: 20px;
   }
 
-  .timeline li::before {
+  .timeline > li::before {
     left: 43px;
   }
 
