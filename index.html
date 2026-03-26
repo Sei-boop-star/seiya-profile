@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>渡邊 聖也 | Seiya Watanabe</title>
+  <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -20,7 +21,7 @@
         <p class="name-en">Seiya Watanabe</p>
         <p class="tagline">素材と暮らしをつなげる。</p>
         <div class="contact">
-          <a href="mailto:watanabe.1.4.seiya@gmail.com">watanabe.1.4.seiya@gmail.com</a>
+          <a class="email-link" href="#">watanabe.1.4.seiya@gmail.com</a>
           <span class="sep">·</span>
           <a href="https://note.com/joyous_clover854" target="_blank">note</a>
         </div>
@@ -133,5 +134,11 @@
     <p>© 2026 Seiya Watanabe</p>
   </footer>
 
+  <script>
+    var u = 'watanabe.1.4.seiya';
+    var d = 'gmail.com';
+    var el = document.querySelector('.email-link');
+    el.href = 'mailto:' + u + '@' + d;
+  </script>
 </body>
 </html>
