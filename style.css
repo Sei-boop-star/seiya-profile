@@ -38,13 +38,14 @@ body {
   gap: 40px;
 }
 
-.hero-photo img {
+.hero-photo-bg {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
+  background-image: url('photo.jpg');
+  background-size: cover;
+  background-position: center top;
+  flex-shrink: 0;
 }
 
 .hero-info h1 {
@@ -313,7 +314,7 @@ footer {
     gap: 20px;
   }
 
-  .hero-photo img {
+  .hero-photo-bg {
     width: 80px;
     height: 80px;
   }
