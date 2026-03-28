@@ -23,6 +23,8 @@
         <div class="contact">
           <a class="email-link" href="#">watanabe.1.4.seiya@gmail.com</a>
           <span class="sep">·</span>
+          <a class="phone-link" href="#">080 2123 0642</a>
+          <span class="sep">·</span>
           <a href="https://note.com/joyous_clover854" target="_blank">note</a>
           <span class="sep">·</span>
           <a href="https://discord.com/channels/1464854485779218535/1464854487284846651/1468283330523824211" target="_blank">シンギュラボ・スペース自己紹介</a>
@@ -141,6 +143,10 @@
     var d = 'gmail.com';
     var el = document.querySelector('.email-link');
     el.href = 'mailto:' + u + '@' + d;
+    var p = ['080', '2123', '0642'].join('-');
+    var pel = document.querySelector('.phone-link');
+    pel.href = 'tel:' + p.replace(/-/g, '');
+    pel.textContent = p;
   </script>
 </body>
 </html>
