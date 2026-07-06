@@ -6,7 +6,7 @@
   <title>仕事 — 渡邊 聖也 | Seiya Watanabe</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,15 +14,25 @@
   <nav class="site-nav">
     <a href="index.html">プロフィール</a>
     <a href="work.html" class="active">仕事</a>
-    <a href="resume.html">経歴書</a>
+    <a href="history.html">自分史</a>
   </nav>
 
-  <header class="work-hero">
-    <div class="work-hero-inner">
-      <h1>現場の言葉を、回る形に整える。</h1>
-      <div class="work-lead">
-        <p>ITコンサルではありません。現場と道具のあいだに立つ翻訳者です。</p>
-        <p>前職は品質管理12年。たばこの味と香りという曖昧なものを、誰でも同じ判断ができる基準に落とす仕事を続けてきました。いまは庭あその現場で接客も穴掘りもしながら、AIを日常の道具にしています。</p>
+  <header class="titleblock">
+    <div class="titleblock-inner">
+      <div class="id-row">
+        <div class="id-photo"></div>
+        <div class="id-name">
+          <h1>渡邊 聖也</h1>
+          <p class="romaji">SEIYA WATANABE</p>
+          <p class="role">品質管理12年 → 店舗の現場でAI実装</p>
+        </div>
+      </div>
+      <p class="tb-lead">現場の言葉を、回る形に整える仕事をしています。ここに載せているのは、<strong>浜松の店の現場でいま毎日使われているものだけ</strong>です。</p>
+      <p class="tb-target"><span class="tl">対象</span>専任のIT担当がいないお店・会社。メモと口頭の指示があれば始められます。</p>
+      <div class="metrics">
+        <div class="metric"><p class="k">品質管理・製造の現場</p><p class="v">12<small> 年</small></p></div>
+        <div class="metric"><p class="k">現場で稼働中の仕組み</p><p class="v">11<small> 件</small></p></div>
+        <div class="metric"><p class="k">納品書の転記作業</p><p class="v">5h→<small>確認のみ</small></p></div>
       </div>
     </div>
   </header>
@@ -30,125 +40,106 @@
   <main>
 
     <section class="section">
-      <h2>こんなところから</h2>
-      <ul class="trouble-list">
-        <li>問い合わせの返信を、毎回ゼロから作って消耗している</li>
-        <li>同じ質問が繰り返されて、現場が止まる</li>
-        <li>日報や引き継ぎが続かず、毎回やり直しになる</li>
+      <h2><span class="no">01</span>こんな状態なら、力になれます</h2>
+      <ul class="checks">
+        <li><span class="box"></span>問い合わせの返信を、毎回ゼロから作って消耗している</li>
+        <li><span class="box"></span>同じ質問が繰り返されて、現場が止まる</li>
+        <li><span class="box"></span>日報や引き継ぎが続かず、毎回やり直しになる</li>
       </ul>
-      <p class="trouble-note">マニュアルを作る時間がない、口頭の指示が伝わらない、も同じ根っこです。</p>
+      <p class="checks-note">マニュアルを作る時間がない、口頭の指示が伝わらない、も同じ根っこです。</p>
     </section>
 
     <section class="section">
-      <h2>進め方</h2>
-      <div class="exchange">
-        <div class="exchange-col">
-          <span class="label">いただくもの — そのままで大丈夫</span>
-          <ul>
-            <li>メモ、口頭の指示</li>
-            <li>古い資料（PDFなど）</li>
-            <li>よくある質問と、その返信</li>
-          </ul>
+      <h2><span class="no">02</span>実例 — 現場の記録から</h2>
+      <table class="cases">
+        <tr><th>案件</th><th>BEFORE</th><th>AFTER</th><th>状態</th></tr>
+        <tr>
+          <td class="name">納品書の転記</td>
+          <td>目視入力5時間。ミスと負担が積み上がる</td>
+          <td class="after">一覧を自動作成。人は最終確認だけ。読めない所は要確認で止まる</td>
+          <td><span class="stamp">済</span></td>
+        </tr>
+        <tr>
+          <td class="name">社内の知恵袋</td>
+          <td>同じ質問の繰り返しで現場が停滞</td>
+          <td class="after">商品情報と判断基準を集約し、まず自分で確認できる形に。改善が現場から出る循環へ</td>
+          <td><span class="stamp">済</span></td>
+        </tr>
+        <tr>
+          <td class="name">返信文の品質</td>
+          <td>人によって文章がブレて確認が増える</td>
+          <td class="after">メモから複数案、最後は人が選ぶだけ。責めない・断定しすぎないも固定</td>
+          <td><span class="stamp">済</span></td>
+        </tr>
+      </table>
+      <p class="case-note">数字は現場の実測です。盛っていません。</p>
+    </section>
+
+    <section class="section">
+      <h2><span class="no">03</span>仕事の基準</h2>
+      <div class="rules">
+        <div class="rule">
+          <span class="no">基準 01</span>
+          <h3>現場の言葉で書く</h3>
+          <p>難しいIT用語は使いません。説明が増えない文章にします。</p>
         </div>
-        <div class="exchange-col result">
-          <span class="label">お渡しするもの — 現場が動ける形</span>
-          <ul>
-            <li>迷わない手順（誰が・いつ）</li>
-            <li>返信のたたき台（確認ポイントつき）</li>
-            <li>チェックリスト</li>
-            <li>迷うケースは要確認で止まる流れ</li>
-          </ul>
+        <div class="rule">
+          <span class="no">基準 02</span>
+          <h3>要確認で止める</h3>
+          <p>AIの出力はそのまま通しません。確定と要確認を分け、最終確定は人がします。</p>
+        </div>
+        <div class="rule">
+          <span class="no">基準 03</span>
+          <h3>定着まで見る</h3>
+          <p>作って終わりにしません。誰が、いつ、どこで止めるかまで作ります。</p>
         </div>
       </div>
+    </section>
+
+    <section class="section">
+      <h2><span class="no">04</span>進め方</h2>
       <div class="steps">
         <div class="step">
-          <span class="step-num">一</span>
+          <span class="no">工程 1</span>
           <h3>お話を聞く</h3>
           <p>現場の負荷をそのまま教えてください。譲れないこだわりも一緒に整理します。</p>
         </div>
         <div class="step">
-          <span class="step-num">二</span>
+          <span class="no">工程 2</span>
           <h3>小さく試す</h3>
           <p>1〜2週間で動くたたき台を作ります。動くもので判断できます。</p>
         </div>
         <div class="step">
-          <span class="step-num">三</span>
+          <span class="no">工程 3</span>
           <h3>回る形に整える</h3>
-          <p>迷わず使えるまで、手順と文面を整えます。作って終わりにしません。</p>
+          <p>迷わず使えるまで、手順と文面を整えます。</p>
         </div>
       </div>
+      <p class="deliver-note"><span class="dl">お渡しする形</span>迷わない手順（誰が・いつ）／返信のたたき台（確認ポイントつき）／チェックリスト／要確認で止まる流れ</p>
     </section>
 
     <section class="section">
-      <h2>約束</h2>
-      <ul class="promise-list">
-        <li>
-          <h3>現場の言葉で整える</h3>
-          <p>難しいIT用語は使いません。言い回しをそろえ、説明が増えない文章にします。</p>
-        </li>
-        <li>
-          <h3>要確認で止める</h3>
-          <p>AIの出力はそのまま通しません。確定と要確認を分け、最終確定は人がします。</p>
-        </li>
-        <li>
-          <h3>定着まで整える</h3>
-          <p>作って終わりにしません。誰が、いつ、どこで止めるかまで作ります。</p>
-        </li>
-      </ul>
+      <h2><span class="no">05</span>ほかに現場で稼働中のもの</h2>
+      <div class="tags">
+        <span>展示会POPの自動生成</span>
+        <span>売上目標の予実ダッシュボード</span>
+        <span>Instagram投稿のアシスタント</span>
+        <span>経営レポートの自動生成</span>
+        <span>週報の定常運用</span>
+        <span>店内デジタルマップ</span>
+        <span>予約ページ</span>
+        <span>商品ギャラリー</span>
+      </div>
+      <p class="more-note">いずれも庭あそ（浜松・4事業3店舗）の現場で、日々使われています。</p>
     </section>
 
     <section class="section">
-      <h2>実例</h2>
-      <article class="case">
-        <h3>納品書の転記 — 5時間が、確認だけに</h3>
-        <dl>
-          <dt>Before</dt>
-          <dd>目視入力が多く、ミスと負担が積み上がる。</dd>
-          <dt class="after">After</dt>
-          <dd class="after-dd">一覧を自動で作成し、人は最終確認だけ。読めないところは要確認に分かれて止まる。</dd>
-        </dl>
-      </article>
-      <article class="case">
-        <h3>質問が減る、社内の知恵袋</h3>
-        <dl>
-          <dt>Before</dt>
-          <dd>同じ質問が繰り返され、現場が止まりやすい。</dd>
-          <dt class="after">After</dt>
-          <dd class="after-dd">商品情報と判断基準をまとめ、スタッフがまず自分で確認できる形に。改善が現場から出る循環につながった。</dd>
-        </dl>
-      </article>
-      <article class="case">
-        <h3>説明文・返信文の品質をそろえる</h3>
-        <dl>
-          <dt>Before</dt>
-          <dd>人によって文章がブレて、確認が増える。</dd>
-          <dt class="after">After</dt>
-          <dd class="after-dd">メモから複数案を出し、最後は人が選ぶだけ。責めない・断定しすぎないも固定して、文章の雰囲気をそろえる。</dd>
-        </dl>
-      </article>
-    </section>
-
-    <section class="section">
-      <h2>ほかにやってきたこと</h2>
-      <ul class="more-list">
-        <li>展示会POPの自動生成</li>
-        <li>売上目標の予実ダッシュボード</li>
-        <li>Instagram投稿のアシスタント</li>
-        <li>経営レポートの自動生成</li>
-        <li>週報の定常運用</li>
-        <li>店内デジタルマップ</li>
-        <li>予約ページの立ち上げ</li>
-        <li>商品ギャラリー</li>
-      </ul>
-      <p class="more-note">いずれも庭あその現場で、日々使われているものです。</p>
-    </section>
-
-    <section class="section">
-      <h2>連絡</h2>
-      <p class="reach">
-        まずは現場の困りごとを、そのまま聞かせてください。<br>
-        <a class="email-link" href="#">watanabe.1.4.seiya@gmail.com</a>　／　詳しい経歴は<a href="resume.html">経歴書</a>へ。
-      </p>
+      <h2><span class="no">06</span>連絡</h2>
+      <div class="contact-block">
+        まずは困りごとを、そのまま聞かせてください。要件の整理はこちらの仕事です。<br>
+        <a class="email-link" href="#">watanabe.1.4.seiya@gmail.com</a>　／　印刷用の<a href="resume.html">職務経歴書</a>もあります。<br>
+        接客の現場で考えていることは<a href="https://note.com/sane_jaguar2203" target="_blank">note（接客の種まきノート）</a>にも書いています。
+      </div>
     </section>
 
   </main>
