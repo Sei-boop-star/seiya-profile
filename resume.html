@@ -8,8 +8,36 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="resume.css">
+  <style>
+    /* 画面表示のみの簡易ナビ（印刷時は消す） */
+    .site-nav {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 24px 24px 0;
+      display: flex;
+      gap: 28px;
+      font-size: 12.5px;
+      letter-spacing: 0.08em;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .site-nav a {
+      color: #8b8272;
+      text-decoration: none;
+      padding-bottom: 3px;
+      border-bottom: 1px solid transparent;
+    }
+    .site-nav a:hover { color: #26221c; border-color: #cfc4ad; }
+    .site-nav a.active { color: #26221c; border-color: #9c5b33; }
+    @media print { .site-nav { display: none; } }
+  </style>
 </head>
 <body>
+
+  <nav class="site-nav">
+    <a href="index.html">プロフィール</a>
+    <a href="work.html">仕事</a>
+    <a href="resume.html" class="active">経歴書</a>
+  </nav>
 
   <div class="page">
 
