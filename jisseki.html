@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>実績記録簿 — 渡邊 聖也 | Seiya Watanabe</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* 記録簿ページ専用（work の検査記録の意匠を台帳側に寄せる） */
+    .tb-lead a, .ledger-note a, .idx-note a, .handoff a {
+      color: var(--rust);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--line-strong);
+    }
+    .tb-lead a:hover, .ledger-note a:hover, .idx-note a:hover, .handoff a:hover { text-decoration-color: var(--rust); }
+
+    /* 読む人別の案内 */
+    .guide {
+      max-width: var(--max-width);
+      margin: 20px auto 0;
+      padding: 0 24px;
+    }
+    .guide-inner {
+      background: var(--card);
+      border: 1px solid var(--line-strong);
+      padding: 6px 22px;
+    }
+    .guide-row {
+      display: flex;
+      gap: 14px;
+      align-items: baseline;
+      padding: 10px 0;
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 1.8;
+    }
+    .guide-row + .guide-row { border-top: 1px dashed var(--line-strong); }
+    .guide-row .who {
+      font-family: var(--serif);
+      color: var(--ink);
+      white-space: nowrap;
+      min-width: 12em;
+    }
+    .guide-row a { color: var(--rust); text-decoration: none; border-bottom: 1px solid var(--line-strong); }
+    .guide-row a:hover { border-bottom-color: var(--rust); }
+
+    /* 実測の数字 */
+    .figures {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .figure {
+      background: var(--card);
+      border: 1px solid var(--line-strong);
+      padding: 14px 14px 12px;
+    }
+    .figure .v {
+      font-family: var(--mono);
+      font-size: 21px;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    .figure .v small { font-size: 11px; color: var(--muted); }
+    .figure .k {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.6;
+    }
+
+    /* 悩みから引く索引 */
+    .idx { display: grid; gap: 20px; }
+    .idx-theme {
+      background: var(--card);
+      border: 1px solid var(--line-strong);
+      border-left: 3px solid var(--rust);
+      padding: 16px 20px 14px;
+    }
+    .idx-theme h3 {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+    }
+    .idx-theme .to {
+      font-size: 12.5px;
+      color: var(--sub);
+      margin: 6px 0 12px;
+      line-height: 1.8;
+    }
+    .idx-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .idx-chips a {
+      display: inline-block;
+      font-size: 12px;
+      color: var(--sub);
+      text-decoration: none;
+      border: 1px solid var(--line-strong);
+      background: var(--paper);
+      padding: 5px 10px;
+      line-height: 1.5;
+    }
+    .idx-chips a .n {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--rust);
+      margin-right: 6px;
+    }
+    .idx-chips a:hover { border-color: var(--rust); color: var(--ink); }
+    .idx-note { font-size: 12.5px; color: var(--muted); margin-top: 16px; line-height: 1.9; }
+
+    /* 台帳 */
+    .ledger {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid var(--line-strong);
+      font-size: 13px;
+    }
+    .ledger th {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 500;
+      color: var(--rust);
+      letter-spacing: 0.12em;
+      text-align: left;
+      padding: 9px 12px;
+      border-bottom: 2px solid var(--rust);
+      white-space: nowrap;
+    }
+    .ledger td {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      color: var(--sub);
+      line-height: 1.8;
+    }
+    .ledger tr:last-child td { border-bottom: none; }
+    .ledger tr[id] { scroll-margin-top: 28px; }
+    .ledger tr:target { background: #f0e7d3; }
+    .ledger td.rec {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 14px;
+    }
+    .ledger td.name {
+      font-family: var(--serif);
+      font-weight: 500;
+      color: var(--ink);
+      min-width: 9em;
+    }
+    .ledger td.name small {
+      display: block;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      letter-spacing: 0;
+    }
+    .ledger td.num {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .ledger td.num small { color: var(--muted); font-size: 10.5px; }
+    .ledger .st { text-align: center; }
+    .stamp.dim { color: var(--muted); border-color: var(--muted); opacity: 0.85; }
+    .group-lead {
+      font-size: 13.5px;
+      color: var(--sub);
+      line-height: 1.9;
+      max-width: 640px;
+      margin: -18px 0 22px;
+    }
+    .ledger-note {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.9;
+      max-width: 640px;
+      margin-top: 14px;
+    }
+
+    /* 決め事（凡例と型） */
+    .rulebook {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .rulebook .col {
+      background: var(--card);
+      border: 1px solid var(--line-strong);
+      border-top: 2px solid var(--rust);
+      padding: 18px 22px;
+    }
+    .rulebook h3 {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+    .rulebook ul { list-style: none; }
+    .rulebook li {
+      font-size: 12.5px;
+      color: var(--sub);
+      line-height: 1.9;
+      padding: 6px 0;
+    }
+    .rulebook li + li { border-top: 1px dashed var(--line); }
+    .rulebook li .lg {
+      font-family: var(--serif);
+      color: var(--rust);
+      margin-right: 8px;
+    }
+    .rulebook-note {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 16px;
+      line-height: 1.9;
+      max-width: 640px;
+    }
+
+    /* 連絡と渡し方 */
+    .handoff { display: grid; gap: 16px; max-width: 640px; }
+    .handoff .way {
+      background: var(--card);
+      border: 1px solid var(--line-strong);
+      padding: 16px 20px;
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 2.0;
+    }
+    .handoff .way h3 {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+    }
+    .handoff blockquote {
+      border-left: 2px solid var(--line-strong);
+      padding: 4px 0 4px 14px;
+      margin: 8px 0 4px;
+      color: var(--ink);
+      font-size: 12.5px;
+    }
+
+    @media (max-width: 720px) {
+      .figures { grid-template-columns: 1fr 1fr; }
+      .rulebook { grid-template-columns: 1fr; }
+      .guide-row { flex-direction: column; gap: 2px; }
+      .guide-row .who { min-width: 0; }
+      /* 台帳は積みカードに組み替える */
+      .ledger, .ledger tbody, .ledger tr, .ledger td { display: block; width: 100%; }
+      .ledger tr.head { display: none; }
+      .ledger tr { position: relative; padding: 14px 14px 12px; border-bottom: 1px solid var(--line); }
+      .ledger tr:last-child { border-bottom: none; }
+      .ledger td { border: none; padding: 0; }
+      .ledger td.rec { font-size: 10px; margin-bottom: 4px; }
+      .ledger td.name { padding-right: 56px; margin-bottom: 6px; }
+      .ledger td.name small { margin-top: 2px; }
+      .ledger td.num { white-space: normal; margin-top: 6px; }
+      .ledger td.num br { display: none; }
+      .ledger td.num small { margin-left: 8px; }
+      .ledger td.st { position: absolute; top: 14px; right: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html">プロフィール</a>
+    <a href="work.html">仕事</a>
+    <a href="history.html">自分史</a>
+  </nav>
+
+  <header class="titleblock">
+    <div class="titleblock-inner">
+      <div class="id-row">
+        <div class="id-name">
+          <h1>実績記録簿</h1>
+          <p class="romaji">RECORD OF WORKS — 2026</p>
+          <p class="role">浜松の店（4事業3店舗）の現場でつくったもの、全件</p>
+        </div>
+      </div>
+      <p class="tb-lead"><a href="work.html">仕事のページ</a>には選んだ実例だけを載せています。ここはその元台帳です。<strong>設計段階のもの・数字がまだ無いものも、その状態のまま</strong>全部載せています。</p>
+      <div class="metrics">
+        <div class="metric"><p class="k">記録件数</p><p class="v">20<small> 件</small></p></div>
+        <div class="metric"><p class="k">うち現場で回っているもの</p><p class="v">9<small> 件</small></p></div>
+        <div class="metric"><p class="k">増えた月額の固定費</p><p class="v">AI利用料<small>のみ</small></p></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="guide">
+    <div class="guide-inner">
+      <div class="guide-row">
+        <span class="who">店や会社をやっている方</span>
+        <span><a href="#idx">「02 悩みから引く」</a>からどうぞ。似た行がひとつ見つかれば、それが入口です。</span>
+      </div>
+      <div class="guide-row">
+        <span class="who">紹介を考えてくださる方</span>
+        <span>このページのURLごと渡せます。<a href="#handoff">「07 連絡と渡し方」</a>に、そのまま送れる紹介文を置きました。</span>
+      </div>
+      <div class="guide-row">
+        <span class="who">仕事ぶりを確かめに来た方</span>
+        <span><a href="#rules">「06 この記録簿の決め事」</a>からどうぞ。状態の付け方と、設計で守っている型を先に開いています。</span>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <section class="section">
+      <h2><span class="no">01</span>実測の数字</h2>
+      <div class="figures">
+        <div class="figure"><p class="v">5h→<small>確認のみ</small></p><p class="k">納品書の転記。人の作業は最終確認だけに</p></div>
+        <div class="figure"><p class="v">6手→4手</p><p class="k">無人店の予約入力。重複はサーバー側で防止</p></div>
+        <div class="figure"><p class="v">81<small> 訪問・IG経由68%</small></p><p class="k">店内デジタルマップ公開2日の実測（自己アクセス除外済み）</p></div>
+        <div class="figure"><p class="v">208<small> 投稿</small></p><p class="k">SNS過去投稿を索引化。接客中にその場で検索</p></div>
+      </div>
+      <p class="ledger-note">数字はすべて実測です。まだ計測していないものは、下の台帳に「未計測」と書いてあります。</p>
+    </section>
+
+    <section class="section" id="idx">
+      <h2><span class="no">02</span>悩みから引く</h2>
+      <div class="idx">
+        <div class="idx-theme">
+          <h3>数字はあるのに、判断は勘と記憶だのみ</h3>
+          <p class="to">→ 目標と実績が自動で突き合い、判断の物差しが毎週手元に届く形に組み替えます。</p>
+          <div class="idx-chips">
+            <a href="#j-02"><span class="n">J-02</span>目標と実績の突合</a>
+            <a href="#j-01"><span class="n">J-01</span>経営レポートの自動生成</a>
+            <a href="#j-03"><span class="n">J-03</span>週報の定常運用</a>
+            <a href="#j-14"><span class="n">J-14</span>社内ダッシュボード</a>
+            <a href="#j-17"><span class="n">J-17</span>無人日のカメラ運用</a>
+            <a href="#j-18"><span class="n">J-18</span>値上げ効果の測り方</a>
+          </div>
+        </div>
+        <div class="idx-theme">
+          <h3>仕事が、特定の誰かの頑張りだのみ</h3>
+          <p class="to">→ たたき台はAIが出し、人は確認と仕上げだけ、の型に組み替えます。任せて止まらない線引きも一緒に設計します。</p>
+          <div class="idx-chips">
+            <a href="#j-05"><span class="n">J-05</span>納品書の転記</a>
+            <a href="#j-04"><span class="n">J-04</span>スタッフ自走の月次戦略</a>
+            <a href="#j-08"><span class="n">J-08</span>説明文・返信文の品質そろえ</a>
+            <a href="#j-07"><span class="n">J-07</span>社内の知恵袋</a>
+            <a href="#j-09"><span class="n">J-09</span>展示会POPの自動生成</a>
+            <a href="#j-13"><span class="n">J-13</span>商品ギャラリー</a>
+          </div>
+        </div>
+        <div class="idx-theme">
+          <h3>お客さんが、途中で手を止めている</h3>
+          <p class="to">→ 入力や案内の段差を削って、迷う箇所をなくします。効いたかどうかは数字で確かめます。</p>
+          <div class="idx-chips">
+            <a href="#j-10"><span class="n">J-10</span>無人店の予約導線</a>
+            <a href="#j-11"><span class="n">J-11</span>店内デジタルマップ</a>
+            <a href="#j-12"><span class="n">J-12</span>投稿アルバム</a>
+          </div>
+        </div>
+      </div>
+      <p class="idx-note">ここに無い悩みでも、根っこが同じことはよくあります。<a href="work.html">仕事のページ</a>の「こんな状態なら、力になれます」もどうぞ。</p>
+    </section>
+
+    <section class="section">
+      <h2><span class="no">03</span>回っているもの — 運用・稼働中</h2>
+      <p class="group-lead">いま現場で毎週・毎月、実際に使われているものです。</p>
+      <table class="ledger">
+        <tr class="head"><th>NO.</th><th>案件</th><th>困りごと → 打った手</th><th>数字</th><th class="st">状態</th></tr>
+        <tr id="j-01">
+          <td class="rec">J-01</td>
+          <td class="name">経営レポートの自動生成<small>3店舗・週次/月次</small></td>
+          <td>レジ・SNS・日報に散らばる数字の集計が手作業 → 集計はスクリプトで機械的に、読み解きの文章はAIが書く分担で自動化。客単価は平均でなく中央値を主指標に（少数の高額取引に引っ張られないため）</td>
+          <td class="num">週次+月次<br><small>定常運用</small></td>
+          <td class="st"><span class="stamp">運用中</span></td>
+        </tr>
+        <tr id="j-02">
+          <td class="rec">J-02</td>
+          <td class="name">目標と実績の突合<small>予実管理</small></td>
+          <td>実績レポートはあるのに「目標に対して良いか悪いか」は毎回頭の中で計算 → 経営者が触るのは期初の目標額ひとつ。達成率・着地見込みは毎週のレポートに自動で付く</td>
+          <td class="num">手入力は<br>目標額のみ</td>
+          <td class="st"><span class="stamp">運用中</span></td>
+        </tr>
+        <tr id="j-03">
+          <td class="rec">J-03</td>
+          <td class="name">週報の定常運用<small>分析視点の台帳つき</small></td>
+          <td>経営者がグループ全体の週次数字と論点を短時間で把握できない → 週報の生成をスクリプト化。どの分析視点をなぜ採用/廃止したかの台帳を並走させ、レポートが週を追って賢くなる</td>
+          <td class="num">毎週<br><small>200行超/本</small></td>
+          <td class="st"><span class="stamp">運用中</span></td>
+        </tr>
+        <tr id="j-04">
+          <td class="rec">J-04</td>
+          <td class="name">スタッフ自走の月次戦略<small>提案→LINE→合議→学習</small></td>
+          <td>経営者が動かないと店の企画が止まる → AIの提案がLINEに届き、スタッフは話し合って選ぶだけ。選んだ結果で次の提案が賢くなる。可逆な判断はスタッフへ、不可逆な判断だけ経営者に残す線引き</td>
+          <td class="num">月1サイクル<br><small>効果は未計測</small></td>
+          <td class="st"><span class="stamp">運用中</span></td>
+        </tr>
+        <tr id="j-05">
+          <td class="rec">J-05</td>
+          <td class="name">納品書の転記<small>チャットAI期の初仕事</small></td>
+          <td>目視入力5時間、ミスと負担が積み上がる → 一覧を自動作成し、人は最終確認だけ。読めない箇所は「要確認」で止まる</td>
+          <td class="num">5h→確認のみ</td>
+          <td class="st"><span class="stamp">稼働中</span></td>
+        </tr>
+        <tr id="j-06">
+          <td class="rec">J-06</td>
+          <td class="name">AI活用の定期報告<small>2層の記録運用</small></td>
+          <td>AIでの作業がブラックボックス化し、経営者への報告手段がない → 軽い記録（何をやったか）と詳しい報告（なぜ・価値は何か）の2層に分け、月2回の定期報告に</td>
+          <td class="num">月2回</td>
+          <td class="st"><span class="stamp">運用中</span></td>
+        </tr>
+        <tr id="j-07">
+          <td class="rec">J-07</td>
+          <td class="name">社内の知恵袋<small>チャットAI期</small></td>
+          <td>同じ質問が繰り返されて現場が止まる → よくある質問と答えを貯めて、その場で引ける形に</td>
+          <td class="num">—</td>
+          <td class="st"><span class="stamp">稼働中</span></td>
+        </tr>
+        <tr id="j-08">
+          <td class="rec">J-08</td>
+          <td class="name">説明文・返信文の品質そろえ<small>チャットAI期</small></td>
+          <td>問い合わせ返信やお知らせ文の質が書く人の頑張り次第 → たたき台をAIが出し、確認ポイントつきで人が仕上げる型に</td>
+          <td class="num">—</td>
+          <td class="st"><span class="stamp">稼働中</span></td>
+        </tr>
+        <tr id="j-09">
+          <td class="rec">J-09</td>
+          <td class="name">展示会POPの自動生成<small>QRつき値札</small></td>
+          <td>催事のたびに値札POPを手作業で制作 → 金額ごとにQR付きPOPを一括生成。QRはローカル生成で、商品URLを外部サービスに送らない設計</td>
+          <td class="num">4種一括</td>
+          <td class="st"><span class="stamp">稼働中</span></td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2><span class="no">04</span>世に出ているもの — 公開済み</h2>
+      <p class="group-lead">本番公開まで済んでいて、利用の数字はこれから貯まるものです。</p>
+      <table class="ledger">
+        <tr class="head"><th>NO.</th><th>案件</th><th>困りごと → 打った手</th><th>数字</th><th class="st">状態</th></tr>
+        <tr id="j-10">
+          <td class="rec">J-10</td>
+          <td class="name">無人店の予約導線<small>予約サービス置き換え</small></td>
+          <td>汎用予約サービスの段差（意味の取れない入力・英文メッセージ）で、予約画面の前でお客さんが手を止める → 予約の真の目的は駐車場数台の枠管理と見極め、入力を6手から4手に。枠の重複だけはサーバー側で確実に弾く</td>
+          <td class="num">6手→4手<br><small>月額ほぼゼロ</small></td>
+          <td class="st"><span class="stamp">公開済</span></td>
+        </tr>
+        <tr id="j-11">
+          <td class="rec">J-11</td>
+          <td class="name">店内デジタルマップ<small>タップで商品ページへ</small></td>
+          <td>紙の店内マップは自宅でゆっくり見られず、商品への導線も弱い → 俯瞰イラストに番号ピンを置き、タップで購入ページに飛べるマップに。匿名計測つき</td>
+          <td class="num">81訪問/2日<br><small>IG経由68%</small></td>
+          <td class="st"><span class="stamp">公開済</span></td>
+        </tr>
+        <tr id="j-12">
+          <td class="rec">J-12</td>
+          <td class="name">投稿アルバム<small>過去投稿の検索</small></td>
+          <td>お客様の「インスタで見たあれ、どれ？」にその場で答えられない → 経営分析用に集めていた投稿データを転用し、接客中にスマホで全文検索できる索引に</td>
+          <td class="num">208投稿<br><small>1日で制作</small></td>
+          <td class="st"><span class="stamp">公開済</span></td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2><span class="no">05</span>手元で動いているもの — 社内試作</h2>
+      <p class="group-lead">動く形はできていて、社内で試している段階のものです。</p>
+      <table class="ledger">
+        <tr class="head"><th>NO.</th><th>案件</th><th>困りごと → 打った手</th><th>数字</th><th class="st">状態</th></tr>
+        <tr id="j-13">
+          <td class="rec">J-13</td>
+          <td class="name">商品ギャラリー<small>写真つき台帳ビューア</small></td>
+          <td>商品リストが表だけでは分からない → 台帳CSVを写真つきで検索・絞り込みできるビューアに変換。原価を含むため最初から「公開しない」設計、画面共有時に数字を隠すトグルつき</td>
+          <td class="num">—<br><small>未計測</small></td>
+          <td class="st"><span class="stamp dim">試作</span></td>
+        </tr>
+        <tr id="j-14">
+          <td class="rec">J-14</td>
+          <td class="name">社内ダッシュボード<small>スマホで見る予実</small></td>
+          <td>分析ソフトの画面は重くて、スマホでさっと見られない → 数字の「正」は台帳の1か所に置き、画面はその写しを映すだけ、と役割を分けた土台を設計</td>
+          <td class="num">—<br><small>たたき台</small></td>
+          <td class="st"><span class="stamp dim">試作</span></td>
+        </tr>
+        <tr id="j-15">
+          <td class="rec">J-15</td>
+          <td class="name">営業時間内の天気データ<small>分析の前処理</small></td>
+          <td>日次の降水量は夜の雨を巻き込み「営業中の天気」を表さない → 無料の気象データから営業時間の窓で切り出す前処理を制作。どの店舗にも設定だけで足せる</td>
+          <td class="num">追加費用0円</td>
+          <td class="st"><span class="stamp dim">部品</span></td>
+        </tr>
+        <tr id="j-16">
+          <td class="rec">J-16</td>
+          <td class="name">SNS投稿アシスタント<small>スマホ向けUI</small></td>
+          <td>投稿づくりの下ごしらえをスマホで完結させる試み → 1ファイル完結の投稿支援UIを試作</td>
+          <td class="num">—<br><small>未計測</small></td>
+          <td class="st"><span class="stamp dim">試作</span></td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2><span class="no">06</span>紙の上にあるもの — 設計・文書</h2>
+      <p class="group-lead">まだ動いていません。ただ「作る前にここまで決める」も仕事のうちなので、載せています。</p>
+      <table class="ledger">
+        <tr class="head"><th>NO.</th><th>案件</th><th>困りごと → 打った手</th><th>数字</th><th class="st">状態</th></tr>
+        <tr id="j-17">
+          <td class="rec">J-17</td>
+          <td class="name">無人日のカメラ運用<small>映像を見ない例外検知</small></td>
+          <td>無人営業日の映像を毎回全部見るのは続かない → 予約と決済データの突合で「来たのに買わなかった枠」だけ人が見る3層の運用を設計</td>
+          <td class="num">—</td>
+          <td class="st"><span class="stamp dim">設計</span></td>
+        </tr>
+        <tr id="j-18">
+          <td class="rec">J-18</td>
+          <td class="name">値上げ効果の測り方<small>月報のベースライン</small></td>
+          <td>価格改定の成否をあとから判定できない → 改定前の基準値を「今」固定する月報の節構成を設計（遡って作ると数字が動かせてしまうため）</td>
+          <td class="num">—</td>
+          <td class="st"><span class="stamp dim">設計</span></td>
+        </tr>
+        <tr id="j-19">
+          <td class="rec">J-19</td>
+          <td class="name">仕組みの外販パッケージ<small>4層の整理</small></td>
+          <td>内製した仕組みを他県の同業へ売る新規事業が未整理 → 売れる「仕組み」と売らない「人と場の良さ」を分離して4層に棚卸し</td>
+          <td class="num">—</td>
+          <td class="st"><span class="stamp dim">設計</span></td>
+        </tr>
+        <tr id="j-20">
+          <td class="rec">J-20</td>
+          <td class="name">セキュリティ点検<small>AI環境の定期点検</small></td>
+          <td>公開サイト・社内データの扱いに漏れがないか → 秘密情報の直書き・公開範囲を点検し、修正を誰でも実行できる手順書に落とした</td>
+          <td class="num">点検完了</td>
+          <td class="st"><span class="stamp dim">済</span></td>
+        </tr>
+      </table>
+    </section>
+
+    <section class="section" id="rules">
+      <h2><span class="no">07</span>この記録簿の決め事</h2>
+      <div class="rulebook">
+        <div class="col">
+          <h3>状態の付け方</h3>
+          <ul>
+            <li><span class="lg">運用中</span>定期のサイクルで回り続けている</li>
+            <li><span class="lg">稼働中</span>必要な場面で使われ続けている</li>
+            <li><span class="lg">公開済</span>世に出ていて、利用の数字はこれから</li>
+            <li><span class="lg">試作</span>動くが、まだ社内で試している</li>
+            <li><span class="lg">部品</span>単体で完成していて、仕組みに組み込んで使う部材</li>
+            <li><span class="lg">設計</span>まだ紙の上。動いていない</li>
+            <li><span class="lg">済</span>一回かぎりの仕事を終えた</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>設計で守っている型</h3>
+          <ul>
+            <li>取り返しのつく判断は現場へ渡し、つかない判断だけ経営者に残す</li>
+            <li>数字の「正」は1か所に置く。写しは必ずズレるので作らない</li>
+            <li>公開直後の数字から自分のアクセスを除いて、基準値を作り直す</li>
+            <li>商品情報や原価は、外部サービスに送らない設計から始める</li>
+            <li>効果は実測のみ。測っていないものは「未計測」と書く</li>
+          </ul>
+        </div>
+      </div>
+      <p class="rulebook-note">新しいツールはほぼ買っていません。20件のほとんどが、いまあるスプレッドシート・LINE・無料の道具の組み替えで、増えた月額の固定費はAIの利用料だけです（AIを使わずに回るものは、それすらかかっていません）。道具立てはチャットAIから始まりいまはAIエージェントまで使いますが、載せる基準はずっと同じ——<strong>「何で作ったか」ではなく「現場で回っているか」</strong>です。試している段階のものに「済」は押しません。</p>
+    </section>
+
+    <section class="section" id="handoff">
+      <h2><span class="no">08</span>連絡と渡し方</h2>
+      <div class="handoff">
+        <div class="way">
+          <h3>ご自身の店・会社のことなら</h3>
+          台帳の番号をひとつ指して「うちだとこれ」と送ってください。それだけで話が始まります。要件の整理はこちらの仕事です。<br>
+          <a class="email-link" href="#">watanabe.1.4.seiya@gmail.com</a>　／　進め方と料金の考え方は<a href="work.html">仕事のページ</a>に。
+        </div>
+        <div class="way">
+          <h3>どなたかに紹介してくださるなら</h3>
+          このページのURLごと渡してください。添える言葉は、たとえば——
+          <blockquote>浜松の店の現場で、いまある無料の道具とAIを組み替えて「仕事が回る形」を作っている人。実績は台帳で全部見られて、試している段階のものは試していると書いてある。</blockquote>
+        </div>
+        <div class="way">
+          <h3>人となりを確かめたい方は</h3>
+          経歴と考え方は<a href="index.html">プロフィール</a>、来歴の物語は<a href="history.html">自分史</a>に。接客の現場で考えていることは<a href="https://note.com/sane_jaguar2203" target="_blank">note（接客の種まきノート）</a>に書いています。
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Seiya Watanabe</p>
+  </footer>
+
+  <script>
+    var u = 'watanabe.1.4.seiya';
+    var d = 'gmail.com';
+    var el = document.querySelector('.email-link');
+    el.href = 'mailto:' + u + '@' + d;
+  </script>
+</body>
+</html>
